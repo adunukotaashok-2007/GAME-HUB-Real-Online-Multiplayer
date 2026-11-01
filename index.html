@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Game Hub — Online Multiplayer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- HOME -->
+  <div id="screen-home" class="screen active">
+    <h1>🎮 Game Hub</h1>
+    <p class="subtitle">Real Online Multiplayer · 20 Games</p>
+    <div class="name-input">
+      <input id="playerName" placeholder="Your name" maxlength="12">
+      <div class="avatar-pick" id="avatarPick">
+        <span class="av sel" data-av="🎮">🎮</span>
+        <span class="av" data-av="🦊">🦊</span>
+        <span class="av" data-av="🐱">🐱</span>
+        <span class="av" data-av="🐶">🐶</span>
+        <span class="av" data-av="🦁">🦁</span>
+        <span class="av" data-av="🐸">🐸</span>
+        <span class="av" data-av="🤖">🤖</span>
+        <span class="av" data-av="👾">👾</span>
+      </div>
+    </div>
+    <div class="home-buttons">
+      <button id="btnCreate" class="btn primary">🏠 Create Room</button>
+      <div class="join-row">
+        <input id="roomCodeInput" placeholder="Room code" maxlength="6">
+        <button id="btnJoin" class="btn secondary">Join</button>
+      </div>
+    </div>
+    <div id="homeError" class="error-msg"></div>
+    <h3>20 Games Available</h3>
+    <div class="game-grid-mini" id="gameGridMini"></div>
+    <button id="btnSinglePlayer" class="btn outline">🕹️ Single Player Mode</button>
+  </div>
+
+  <!-- LOBBY -->
+  <div id="screen-lobby" class="screen">
+    <h2>Game Lobby</h2>
+    <div class="room-code-display">
+      Room: <strong id="lobbyCode">------</strong>
+      <button id="btnCopyLink" class="btn-sm">📋 Copy Link</button>
+    </div>
+    <div class="players-display">
+      <div class="player-card" id="p1Card">
+        <span class="player-avatar" id="p1Avatar">❓</span>
+        <span class="player-name" id="p1Name">Waiting...</span>
+        <span class="ready-badge" id="p1Ready">⏳</span>
+      </div>
+      <div class="vs">VS</div>
+      <div class="player-card" id="p2Card">
+        <span class="player-avatar" id="p2Avatar">❓</span>
+        <span class="player-name" id="p2Name">Waiting...</span>
+        <span class="ready-badge" id="p2Ready">⏳</span>
+      </div>
+    </div>
+    <div class="lobby-controls">
+      <button id="btnReady" class="btn primary">✅ Ready Up</button>
+      <div class="game-select" id="gameSelect">
+        <label>Select Game:</label>
+        <select id="gameDropdown"></select>
+      </div>
+      <button id="btnStart" class="btn success" disabled>🚀 Start Game</button>
+      <button id="btnLeave" class="btn danger">🚪 Leave Room</button>
+    </div>
+    <div class="connection-status" id="connStatus">🟢 Connected</div>
+  </div>
+
+  <!-- GAME -->
+  <div id="screen-game" class="screen">
+    <div class="game-header">
+      <button id="btnBackLobby" class="btn-sm">← Lobby</button>
+      <h2 id="gameTitle">Game</h2>
+      <div class="game-scores" id="gameScores"></div>
+    </div>
+    <div class="game-info" id="gameInfo"></div>
+    <div class="game-board" id="gameBoard"></div>
+    <div class="game-controls" id="gameControls"></div>
+    <div class="game-result" id="gameResult" style="display:none">
+      <h2 id="resultText"></h2>
+      <button id="btnRematch" class="btn primary">🔄 Rematch</button>
+      <button id="btnBackFromGame" class="btn secondary">← Lobby</button>
+    </div>
+  </div>
+
+  <!-- SINGLE PLAYER -->
+  <div id="screen-single" class="screen">
+    <div style="display:flex;align-items:center;gap:8px">
+      <button id="btnBackHome" class="btn-sm">← Home</button>
+      <h2 style="flex:1">Single Player</h2>
+    </div>
+    <div class="game-grid" id="singleGameGrid"></div>
+    <div id="singleArea" style="display:none">
+      <button id="btnBackToList" class="btn-sm" style="margin-bottom:8px">← Game List</button>
+      <div class="game-info" id="singleInfo"></div>
+      <div class="game-board" id="singleBoard"></div>
+      <div class="game-controls" id="singleControls"></div>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div id="chatPanel" class="chat-panel" style="display:none">
+    <div class="chat-header">
+      <span>💬 Chat</span>
+      <button id="btnCloseChat" class="btn-sm">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick">
+      <button class="quick-msg" data-msg="Good luck! 🍀">🍀</button>
+      <button class="quick-msg" data-msg="Nice! 👏">👏</button>
+      <button class="quick-msg" data-msg="GG! 🎉">🎉</button>
+      <button class="quick-msg" data-msg="😂">😂</button>
+      <button class="quick-msg" data-msg="😎">😎</button>
+    </div>
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Type..." maxlength="100">
+      <button id="btnSendChat" class="btn-sm">Send</button>
+    </div>
+  </div>
+  <button id="btnOpenChat" class="chat-toggle" style="display:none">💬</button>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
